@@ -14,10 +14,12 @@ use App\Http\Controllers\LensController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('lens.filter',['color'=>'gray']);
 });
 
 Route::resource('lens',LensController::class);
+
+Route::get('/filter','\App\Http\Controllers\LensController@filter')->name('lens.filter');
 
 Route::get('admin', function () {
     return view('index');

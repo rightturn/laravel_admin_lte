@@ -21,4 +21,17 @@ class Lens extends Model
         'curve',
         'diameter'
     ];
+
+
+    protected $fillable = [
+        'name',
+        'color',
+        'material',
+        'company',
+        'series',
+        'life',
+        'curve',
+        'diameter',
+        'image'
+    ];
 }

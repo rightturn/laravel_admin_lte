@@ -20,12 +20,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form>
+                            <form method="post" action="{{route('lens.store')}}" enctype="multipart/form-data">
+                            @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Name">
+                                            <input type="text" required name="name" class="form-control" autofocus id="name" placeholder="Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -109,21 +110,28 @@
                                             <label for="diameter">Diameter</label>
                                             <select class="form-control" name="diameter" id="diameter">
                                                 <option value="13.00">13.00 mm</option>
-                                                <option value="13.00">13.50 mm</option>
-                                                <option value="13.00">14.00 mm</option>
-                                                <option value="13.00">14.30 mm</option>
-                                                <option value="13.00">14.40 mm</option>
-                                                <option value="13.00">14.50 mm</option>
-                                                <option value="13.00">14.60 mm</option>
-                                                <option value="13.00">14.70 mm</option>
+                                                <option value="13.50">13.50 mm</option>
+                                                <option value="14.00">14.00 mm</option>
+                                                <option value="14.30">14.30 mm</option>
+                                                <option value="14.40">14.40 mm</option>
+                                                <option value="14.50">14.50 mm</option>
+                                                <option value="14.60">14.60 mm</option>
+                                                <option value="14.70">14.70 mm</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <label for="image">Image</label>
-                                        <input type="file" class="form-control" id="image" name="image">
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" required class="form-control" id="image" name="image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-right">
+                                        <button>Submit</button>
                                     </div>
                                 </div>
                             </form>

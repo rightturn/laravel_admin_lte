@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lens;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; 
 
 class LensController extends Controller
 {
@@ -16,6 +17,14 @@ class LensController extends Controller
     {
         $lens =  Lens::sortable()->paginate(10);
         return view('index',compact('lens'));
+    }
+
+
+    public function filter(Request $request)
+    {
+        $color = $request->color;
+        $lens = Lens::where('color',$color)->get();
+        return view('welcome',compact('lens','color'));
     }
 
     /**
@@ -36,7 +45,15 @@ class LensController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $path = $request->file('image')->store('public');
+
+        $lens = Lens::create($request->all());
+
+        $lens->image = $path;
+        $lens->update();
+
+        return redirect()->route('lens.index');
     }
 
     /**
@@ -47,7 +64,7 @@ class LensController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show called";
     }
 
     /**
@@ -58,7 +75,9 @@ class LensController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lens = Lens::find($id);
+
+        return view('edit',compact('lens'));
     }
 
     /**
@@ -70,7 +89,20 @@ class LensController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lens = Lens::find($id);
+
+        File::delete(str_replace('public','storage',$lens->image));
+
+        $lens->delete();
+
+        $path = $request->file('image')->store('public');
+
+        $lens = Lens::create($request->all());
+
+        $lens->image = $path;
+        $lens->update();
+
+        return redirect()->route('lens.index');
     }
 
     /**
@@ -81,6 +113,12 @@ class LensController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lens = Lens::find($id);
+
+        File::delete(str_replace('public','storage',$lens->image));
+
+        $lens->delete();
+        
+        return redirect()->route('lens.index');
     }
 }

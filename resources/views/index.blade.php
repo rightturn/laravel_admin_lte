@@ -39,9 +39,14 @@
                                 <tbody>
                                 @foreach($lens as $l)
                                     <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
+                                        <td><a href="{{route('lens.edit',[$l->id])}}">{{$l->name}}</a></td>
+                                        <td>{{$l->color}}</td>
+                                        <td>{{$l->material}}</td>
+                                        <td>{{$l->company}}</td>
+                                        <td>{{$l->series}}</td>
+                                        <td>{{$l->life}}</td>
+                                        <td>{{$l->curve}}</td>
+                                        <td>{{$l->diameter}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -49,6 +54,11 @@
                         </div>
                     </div>
                     <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{$lens->links()}}
+                        </div>
+                    </div>
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
